@@ -1,0 +1,16 @@
+
+-- RUN THIS FILE ON SQLSERVER DB
+
+CREATE DATABASE db;
+
+USE db
+GO
+CREATE TABLE News (Id INT IDENTITY, Hat VARCHAR(50), Title VARCHAR(255), CONSTRAINT pk PRIMARY KEY(Id))
+GO
+USE db
+GO
+EXEC sys.sp_cdc_enable_db
+GO
+USE db
+
+EXEC sys.sp_cdc_enable_table @source_schema = N'dbo', @source_name = N'News', @role_name = NULL, @filegroup_name = N'PRIMARY'

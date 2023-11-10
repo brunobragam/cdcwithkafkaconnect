@@ -1,0 +1,38 @@
+ {
+  "name": "sqlserversource",
+  "config": {
+    "name": "sqlserversource",
+    "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
+    "database.server.name": "dsp",
+    "database.dbname": "db",
+    "database.hostname":"<your-vm-ip-here>",
+    "database.port": "1433",
+    "database.user": "sa",
+    "database.password": "Thunderc@ts123",
+    "database.history.kafka.bootstrap.servers": "<your-vm-ip-here>:9092",
+
+    "snapshot.mode": "initial",
+ 
+    "errors.log.include.messages": "true",
+    "errors.log.enable": "true",
+    "errors.tolerance": "all",
+    
+    "value.converter.schemas.enable": true,
+    "value.converter": "io.confluent.connect.avro.AvroConverter",
+    "value.converter.schema.registry.url": "http://<your-vm-ip-here>:8081",
+    "key.converter":"io.confluent.connect.avro.AvroConverter",
+    "key.converter.schema.registry.url": "http://<your-vm-ip-here>:8081",
+    "key.converter.schemas.enable": true,
+
+    "transforms": "unwrap",
+    "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+    "transforms.unwrap.drop.tombstones": "false",
+
+
+    "auto.create.topics.enable": true,
+    "database.history.kafka.topic": "schema-changes.db"
+
+
+  }
+}
+
